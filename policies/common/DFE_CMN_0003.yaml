@@ -1,0 +1,10 @@
+metadata:
+  name: "Ensure all Azure resources have an 'Product' tag"
+  id: "DFE_CMN_0003"
+  category: "GENERAL_SECURITY"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "all"
+  attribute: "tags.Product"
+  operator: "exists"

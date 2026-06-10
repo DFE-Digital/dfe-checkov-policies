@@ -1,0 +1,14 @@
+metadata:
+  name: "Ensure all Azure resources have an 'Environment' tag"
+  id: "DFE_CMN_0001"
+  category: "GENERAL_SECURITY"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "all"
+  attribute: "tags.Environment"
+  operator: "within"
+  value:
+    - "Dev"
+    - "Test"
+    - "Prod"

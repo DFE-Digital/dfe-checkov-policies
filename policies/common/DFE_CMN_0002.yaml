@@ -1,0 +1,10 @@
+metadata:
+  name: "Ensure all Azure resources have an 'Service Offering' tag"
+  id: "DFE_CMN_0002"
+  category: "GENERAL_SECURITY"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "all"
+  attribute: "tags.Service Offering"
+  operator: "exists"

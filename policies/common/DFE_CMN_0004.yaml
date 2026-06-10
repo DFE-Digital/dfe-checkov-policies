@@ -1,0 +1,11 @@
+metadata:
+  name: "Ensure that Azure Key Vault uses Role-Based Access Control (RBAC) authorization"
+  id: "DFE_CMN_0004"
+  category: "GENERAL_SECURITY"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "azurerm_key_vault"
+  attribute: "rbac_authorization_enabled"
+  operator: "equals"
+  value: true

@@ -1,0 +1,13 @@
+metadata:
+  name: "Ensure resources are provisioned in UK South (ELZ Standard)"
+  id: "DFE_ELZ_0002"
+  category: "GENERAL_SECURITY"
+scope:
+  providers: "azurerm"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "all"
+  attribute: "location"
+  operator: "contains"
+  value: "uksouth"

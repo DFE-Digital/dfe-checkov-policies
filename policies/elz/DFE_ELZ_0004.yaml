@@ -1,0 +1,12 @@
+metadata:
+  name: "Block resources (i.e. AI, Foundry)"
+  id: "DFE_ELZ_0004"
+  category: "GENERAL_SECURITY"
+scope:
+  providers: "azurerm"
+definition:
+  cond_type: "resource"
+  resource_types:
+    - "azurerm_cognitive_account"
+    - "azurerm_machine_learning_workspace"
+  operator: "not_exists"

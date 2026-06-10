@@ -1,0 +1,9 @@
+metadata:
+  name: "Deny Cosmos DB"
+  id: "DFE_CMN_0005"
+  category: "GOVERNANCE"
+definition:
+  cond_type: "resource"
+  resource_types:
+    - "azurerm_cosmosdb_account"
+  operator: "not_exists"

@@ -1,0 +1,19 @@
+metadata:
+  id: "DFE_ELZ_0005"
+  name: "Ensure diagnostic logs in Azure AI services resources are enabled"
+  category: "LOGGING"
+definition:
+  and:
+    - cond_type: "filter"
+      attribute: "resource_type"
+      operator: "within"
+      value:
+        - "azurerm_cognitive_account"
+        - "azurerm_machine_learning_workspace"
+    - cond_type: "connection"
+      resource_types:
+        - "azurerm_cognitive_account"
+        - "azurerm_machine_learning_workspace"
+      connected_resource_types:
+        - "azurerm_monitor_diagnostic_setting"
+      operator: "exists"

@@ -1,0 +1,11 @@
+metadata:
+  name: "Ensure resource groups follow outlined ELZ naming convention"
+  id: "DFE_ELZ_0001"
+  category: "CONVENTION"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "azurerm_resource_group"
+  attribute: "name"
+  operator: "regex_match"
+  value: "s[0-9]{3}[A-Za-z][0-9]+rg-.*"

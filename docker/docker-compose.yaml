@@ -1,0 +1,33 @@
+services:
+
+  checkov-elz:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: elz
+    image: checkov-elz:local
+    volumes:
+      - ../tests/elz:/tf
+      - ../tests/elz/environments:/env
+    command: >
+      -d /tf
+      --var-file /env/development.tfvars
+      --skip-check CKV*
+      --soft-fail
+      --output cli
+
+  checkov-cip:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: cip
+    image: checkov-cip:local
+    volumes:
+      - ../tests/cip:/tf
+      - ../tests/cip/environments:/env
+    command: >
+      -d /tf
+      --var-file /env/development.tfvars
+      --skip-check CKV*
+      --soft-fail
+      --output cli

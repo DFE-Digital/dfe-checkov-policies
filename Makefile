@@ -1,8 +1,9 @@
 POLICY ?= cip
 ENV ?= development
 CHECKOV_IMAGE ?= bridgecrew/checkov:latest
+COMPOSE_FILE := docker/docker-compose.yaml
 
-.PHONY: test test-cip test-elz tf-fmt help
+.PHONY: test test-cip test-elz tf-fmt build-cip run-cip build-elz run-elz down help
 
 # Default target
 help:
@@ -38,3 +39,18 @@ test-elz:
 
 tf-fmt:
 	terraform fmt -recursive
+
+down:
+	docker-compose -f $(COMPOSE_FILE) down
+
+build-cip:
+	docker-compose -f $(COMPOSE_FILE) build --no-cache checkov-cip
+
+run-cip:
+	docker-compose -f $(COMPOSE_FILE) run --rm checkov-cip
+
+build-elz:
+	docker-compose -f $(COMPOSE_FILE) build --no-cache checkov-elz
+
+run-elz:
+	docker-compose -f $(COMPOSE_FILE) run --rm checkov-elz

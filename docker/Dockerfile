@@ -1,4 +1,4 @@
-FROM bridgecrew/checkov:latest AS base
+FROM bridgecrew/checkov:3.3.1 AS base
 
 COPY policies/common /opt/policies
 COPY docker/entrypoint.sh /entrypoint.sh

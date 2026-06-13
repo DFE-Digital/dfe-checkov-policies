@@ -1,0 +1,50 @@
+version: 2
+updates:
+  - package-ecosystem: "docker"
+    directory: "/docker"
+    schedule:
+      interval: "weekly"
+    rebase-strategy: "auto"
+    cooldown:
+      default-days: 7
+    groups:
+      patch-updates:
+        update-types: ["patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    rebase-strategy: "auto"
+    cooldown:
+      default-days: 7
+    groups:
+      vendor-minor:
+        patterns: ["actions/*"]
+        update-types: ["minor"]
+      patch-updates:
+        update-types: ["patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: "npm"
+    directory: "/docs"
+    schedule:
+      interval: "weekly"
+    rebase-strategy: "auto"
+    insecure-external-code-execution: deny
+    cooldown:
+      default-days: 7
+    groups:
+      vendor-minor:
+        patterns: ["@11ty/*"]
+        update-types: ["minor"]
+      patch-updates:
+        update-types: ["patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]

@@ -17,11 +17,6 @@ override.tf.json
 *.bicep.lock.json
 
 # =====================
-# ARM / JSON deployments
-# =====================
-*.json
-
-# =====================
 # Python / Checkov custom policies
 # =====================
 __pycache__/
@@ -79,3 +74,10 @@ $RECYCLE.BIN/
 *.tmp
 *.bak
 *.swp
+
+# =====================
+# Eleventy (11ty)
+# =====================
+docs/_site/
+docs/node_modules/
+node_modules/

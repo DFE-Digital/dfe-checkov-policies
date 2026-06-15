@@ -1,9 +1,28 @@
+.DEFAULT_GOAL := help
+
 POLICY ?= cip
 ENV ?= development
-CHECKOV_IMAGE ?= bridgecrew/checkov:latest
-COMPOSE_FILE := docker/docker-compose.yaml
 
-.PHONY: test test-cip test-elz tf-fmt build-cip run-cip build-elz run-elz down help
+CHECKOV_IMAGE ?= bridgecrew/checkov:latest
+
+COMPOSE_FILE := docker/docker-compose.yaml
+DOCKER_COMPOSE ?= docker-compose -f $(COMPOSE_FILE)
+
+VALID_POLICIES := cip elz
+
+TEST_DIR := tests/$(POLICY)
+POLICY_DIR := policies/$(POLICY)
+ENV_DIR := $(TEST_DIR)/environments
+VAR_FILE := $(ENV_DIR)/$(ENV).tfvars
+
+CHECKOV_RUN = docker run --rm \
+	-v "$(CURDIR)/$(TEST_DIR):/tests" \
+	-v "$(CURDIR)/$(POLICY_DIR):/policies/$(POLICY)" \
+	-v "$(CURDIR)/policies/common:/policies/common" \
+	-v "$(CURDIR)/$(ENV_DIR):/envs"
+
+.PHONY: test test-cip test-elz build build-cip build-elz run run-cip run-elz \
+	validate-policy validate-paths tf-fmt clean down help
 
 # Default target
 help:
@@ -14,43 +33,57 @@ help:
 	@echo "	make test POLICY=<name> ENV=<env> : Run Checkov tests for a specific policy and environment"
 	@echo "	make tf-fmt : Run Terraform fmt recursively across the project"
 
-test:
-	@if [ ! -d "tests/$(POLICY)" ]; then echo "Error: Test directory not found: tests/$(POLICY)"; exit 1; fi
-	@if [ ! -d "policies/$(POLICY)" ]; then echo "Error: Policy directory not found: policies/$(POLICY)"; exit 1; fi
-	@if [ ! -f "tests/$(POLICY)/environments/$(ENV).tfvars" ]; then echo "Error: Var file not found: tests/$(POLICY)/environments/$(ENV).tfvars"; exit 1; fi
+validate-policy:
+	$(if $(filter $(POLICY),$(VALID_POLICIES)),,\
+		$(error Invalid POLICY '$(POLICY)'. Valid values: $(VALID_POLICIES)))
+
+validate-paths:
+	$(if $(wildcard $(TEST_DIR)),,$(error Missing directory: $(TEST_DIR)))
+	$(if $(wildcard $(POLICY_DIR)),,$(error Missing directory: $(POLICY_DIR)))
+	$(if $(wildcard $(VAR_FILE)),,$(error Missing file: $(VAR_FILE)))
+
+
+test: validate-policy validate-paths
 	@echo "Running Checkov tests for policy set '$(POLICY)' using '$(ENV).tfvars'"
-	docker run --rm \
-		-v "$(CURDIR)/tests/$(POLICY):/tests" \
-		-v "$(CURDIR)/policies/$(POLICY):/policies/$(POLICY)" \
-		-v "$(CURDIR)/policies/common:/policies/common" \
-		-v "$(CURDIR)/tests/$(POLICY)/environments:/envs" \
+	$(CHECKOV_RUN) \
 		$(CHECKOV_IMAGE) \
-		-d "/tests" --var-file "/envs/$(ENV).tfvars" \
-		--external-checks-dir "/policies" \
-		--skip-check "CKV*" \
+		-d /tests \
+		--var-file /envs/$(ENV).tfvars \
+		--external-checks-dir /policies \
+		--skip-check CKV* \
 		--soft-fail \
 		--output cli
 
+build:
+	$(DOCKER_COMPOSE) build --no-cache checkov-$(POLICY)
+
+run:
+	$(DOCKER_COMPOSE) run --rm checkov-$(POLICY)
+
+tf-fmt:
+	terraform fmt -recursive
+
+down:
+	$(DOCKER_COMPOSE) down
+
+clean:
+	$(DOCKER_COMPOSE) down --volumes --remove-orphans
+
+# Convenience aliases
 test-cip:
 	@$(MAKE) test POLICY=cip ENV=$(ENV)
 
 test-elz:
 	@$(MAKE) test POLICY=elz ENV=$(ENV)
 
-tf-fmt:
-	terraform fmt -recursive
-
-down:
-	docker-compose -f $(COMPOSE_FILE) down
-
 build-cip:
-	docker-compose -f $(COMPOSE_FILE) build --no-cache checkov-cip
-
-run-cip:
-	docker-compose -f $(COMPOSE_FILE) run --rm checkov-cip
+	@$(MAKE) build POLICY=cip
 
 build-elz:
-	docker-compose -f $(COMPOSE_FILE) build --no-cache checkov-elz
+	@$(MAKE) build POLICY=elz
+
+run-cip:
+	@$(MAKE) run POLICY=cip
 
 run-elz:
-	docker-compose -f $(COMPOSE_FILE) run --rm checkov-elz
+	@$(MAKE) run POLICY=elz

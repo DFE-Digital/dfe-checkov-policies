@@ -1,8 +1,15 @@
-# Checkov Custom Rules Catalogue
+---
+layout: page
+title: Policy catalogue
+includeInBreadcrumbs: true
+order: 4
+eleventyNavigation:
+  key: Policy catalogue
+---
 
-This document serves as a central repository for all custom Checkov policies developed for the DfE. It provides visibility into existing policies, their purpose, and policies currently under development or consideration.
+This document serves as a central repository for all custom Checkov policies developed. It provides visibility into existing policies, their purpose, and policies currently under development or consideration.
 
-## Catalogue Metadata Glossary
+## Catalogue metadata glossary
 
 | Column          | Description                                                                                                         |
 |:----------------|:--------------------------------------------------------------------------------------------------------------------|
@@ -13,7 +20,7 @@ This document serves as a central repository for all custom Checkov policies dev
 | **Status**      | The current lifecycle stage: `Active` (implemented), `Draft` (in development), or `Proposed` (under consideration). |
 
 
-## Common Policies
+## Common policies
 
 These policies apply to both landing zones (CIP and ELZ).
 
@@ -26,7 +33,7 @@ These policies apply to both landing zones (CIP and ELZ).
 | DFE_CMN_0004 | Azure Key Vault should use RBAC permission model          | Enable RBAC permission model across Key Vaults. Learn more at: https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-migration      | IAM      | Active |
 | DFE_CMN_0005 | Deny Cosmos DB                                            | Deny Cosmos.                                                                                                                                 | Security | Active |
 
-## CIP Policies (Cloud Infrastructure Platform)
+## CIP policies (Cloud Infrastructure Platform)
 
 These policies are specific to the Cloud Infrastructure Platform requirements and standards.
 
@@ -35,7 +42,7 @@ These policies are specific to the Cloud Infrastructure Platform requirements an
 | DFE_CIP_0001  | Enforce all resources have correct location                                                                                    | Enforce all resources have correct location (West Europe or North Europe)                                                                                                                                                                                                                                                                                                                                                                                                                                             | Security   | Active   |
 
 
-## ELZ Policies (Enterprise Landing Zone)
+## ELZ policies (Enterprise Landing Zone)
 
 These policies are specific to the Enterprise Landing Zone requirements and standards.
 

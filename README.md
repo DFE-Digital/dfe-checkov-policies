@@ -1,61 +1,27 @@
-# 🏫 DfE Checkov Policies
+# 🏫 DfE Checkov policies
 
-This repository contains **DfE Checkov policies, examples, and CI integrations** for scanning Azure Infrastructure-as-Code (IaC). It provides:
+This repository contains DfE Checkov policies, examples, and CI integrations for scanning Azure Infrastructure-as-Code (IaC) across DfE landing zones (including CIP and ELZ subscriptions).
 
-* Custom policy structure for DfE
-* CI examples for GitHub and Azure DevOps
+## 📖 Technical documentation
 
-The repository is designed to evolve into the **central source of Checkov policies for DfE landing zones**, including **CIP and ELZ subscriptions**.
+All system prerequisites, local setup instructions, integration examples, policy catalogues, and development guidelines are hosted on our [dedicated technical documentation site](https://dfe-digital.github.io/dfe-checkov-policies).
 
-## 🔍 What is Checkov?
+## 🚀 Future development roadmap
 
-[Checkov](https://www.checkov.io/) is an open-source Infrastructure-as-Code security scanner that detects security and compliance misconfigurations. Checkov supports many frameworks including:
+This repository is designed to grow and evolve as the central compliance scanner for DfE. Our future plans include:
+* Landing Zone Policy Expansion: Continuously expanding custom rules for CIP (Cloud Infrastructure Platform) and ELZ (Enterprise Landing Zone) subscriptions.
+* Bicep Policy Support: Introducing custom rules and compliance scanning for Bicep-based deployments.
+* Multi-Framework Scans: Extending the policy scanner's reach beyond Terraform to evaluate other critical codebase elements, including:
+  * ARM Templates
+  * Dockerfiles
+  * GitHub Workflows
+  * Azure DevOps Pipelines
 
-* Terraform
-* Bicep
-* ARM templates
-* Kubernetes
-* CloudFormation
-* Dockerfiles
+## 💬 Support & feedback
 
-## 🛠️ Prerequisites
+We welcome feedback, suggestions, and rule additions from across the DfE!
 
-To run these policy tests locally, you need the following tools installed on your machine.
-
-### 1. GNU Make
-Used to orchestrate and run the test suites via a simple `Makefile`.
-* **macOS:** Recommended via **Apple Command Line Tools** (`xcode-select --install`) or **Homebrew**.
-* **Windows:** Recommended via **WSL (Windows Subsystem for Linux)**, **Git Bash**, or **Chocolatey/Winget**.
-
-### 2. Docker Engine
-Required to run the Checkov scanner container without needing to manage local Python environments.
-* **macOS:** **Colima** (CLI-only) or **OrbStack** are highly recommended for best performance and battery efficiency.
-* **Windows:** **Rancher Desktop** is recommended if you prefer a visual GUI interface. Alternatively, running open-source **Docker directly inside a WSL 2 distribution** provides a fantastic, lightweight terminal experience.
-
-## 📁 Repository Structure
-
-```
-docs/            # Documentation and guides
-policies/        # Shared, CIP, and ELZ custom Checkov policies
-tests/           # Pass/fail tests for policies
-```
-
-## 🧩 Policies
-
-Contains custom Checkov policies developed by DfE. Policies are organised into:
-
-* CIP: Policies that are specific to **CIP subscriptions**. 
-* ELZ: Policies that are specific to **ELZ subscriptions**.
-
-## 🚀 Future Development
-
-This repository will evolve to include:
-
-* DfE custom Checkov policies
-* landing zone specific policies for CIP and ELZ
-* expanded documentation
-
-## 🔗 Additional Resources
-
-Checkov documentation: https://www.checkov.io/  
-Checkov GitHub repository: https://github.com/bridgecrewio/checkov
+If you encounter a bug, have a feature request, or identify a policy gap that needs to be codified:
+* Search first: Check our existing issues to see if it is already being tracked.
+* Open an issue: Log a bug report or feature request on our [GitHub Issue Tracker](https://github.com/DFE-Digital/dfe-checkov-policies/issues).
+* Contribute: If you want to develop or fix a policy yourself, please refer to the technical documentation site before opening a pull request.

@@ -20,7 +20,7 @@ permissions:
 jobs:
   build-and-push-elz:
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.platform == "ELZ & CIP" || github.event.inputs.platform == "ELZ" }}
+    if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'ELZ' }}
     defaults:
       run:
         working-directory: ./docker
@@ -51,7 +51,7 @@ jobs:
   
   build-and-push-cip:
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.platform == "ELZ & CIP" || github.event.inputs.platform == "CIP" }}
+    if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'CIP' }}
     defaults:
       run:
         working-directory: ./docker

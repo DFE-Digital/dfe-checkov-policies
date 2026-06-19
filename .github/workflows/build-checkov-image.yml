@@ -21,9 +21,6 @@ jobs:
   build-and-push-elz:
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'ELZ' }}
-    defaults:
-      run:
-        working-directory: ./docker
 
     steps:
       - name: Checkout repository
@@ -31,15 +28,21 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
+      - name: Lowercase Repository Name
+        id: lowercase
+        uses: ./.github/actions/lowercase
+        with:
+          value: ${{ github.repository }}
+
       - name: Build Checkov ELZ Image
         run: |
           docker build \
-            . --tag ghcr.io/checkov-elz:${{ github.sha }} \
+            . --tag ghcr.io/${{ steps.lowercase.outputs.lowercased_value }}/checkov-elz:${{ github.sha }} \
             --target elz \
-            --file Dockerfile
+            --file ./docker/Dockerfile
 
       - name: Log in to GitHub Container Registry
-        uses: actions/docker-login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -47,14 +50,11 @@ jobs:
 
       - name: Push Checkov ELZ Image
         run: |
-          docker push ghcr.io/checkov-elz:${{ github.sha }}
+          docker push ghcr.io/${{ steps.lowercase.outputs.lowercased_value }}/checkov-elz:${{ github.sha }}
   
   build-and-push-cip:
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'CIP' }}
-    defaults:
-      run:
-        working-directory: ./docker
 
     steps:
       - name: Checkout repository
@@ -62,15 +62,21 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
+      - name: Lowercase Repository Name
+        id: lowercase
+        uses: ./.github/actions/lowercase
+        with:
+          value: ${{ github.repository }}
+
       - name: Build Checkov CIP Image
         run: |
           docker build \
-            . --tag ghcr.io/checkov-cip:${{ github.sha }} \
+            . --tag ghcr.io/${{ steps.lowercase.outputs.lowercased_value }}/checkov-cip:${{ github.sha }} \
             --target cip \
-            --file Dockerfile
+            --file ./docker/Dockerfile
 
       - name: Log in to GitHub Container Registry
-        uses: actions/docker-login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -78,4 +84,4 @@ jobs:
 
       - name: Push Checkov CIP Image
         run: |
-          docker push ghcr.io/checkov-cip:${{ github.sha }}
+          docker push ghcr.io/${{ steps.lowercase.outputs.lowercased_value }}/checkov-cip:${{ github.sha }}

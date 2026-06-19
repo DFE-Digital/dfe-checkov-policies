@@ -21,9 +21,6 @@ jobs:
   build-and-push-elz:
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'ELZ' }}
-    defaults:
-      run:
-        working-directory: ./docker
 
     steps:
       - name: Checkout repository
@@ -36,7 +33,7 @@ jobs:
           docker build \
             . --tag ghcr.io/checkov-elz:${{ github.sha }} \
             --target elz \
-            --file Dockerfile
+            --file ./docker/Dockerfile
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
@@ -52,9 +49,6 @@ jobs:
   build-and-push-cip:
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'CIP' }}
-    defaults:
-      run:
-        working-directory: ./docker
 
     steps:
       - name: Checkout repository
@@ -67,7 +61,7 @@ jobs:
           docker build \
             . --tag ghcr.io/checkov-cip:${{ github.sha }} \
             --target cip \
-            --file Dockerfile
+            --file ./docker/Dockerfile
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee

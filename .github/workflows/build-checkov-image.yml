@@ -1,0 +1,81 @@
+name: Build and Publish Checkov Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: "Platform to build the Checkov image for"
+        required: true
+        default: "ELZ & CIP"
+        type: choice
+        options:
+          - "ELZ & CIP"
+          - "ELZ"
+          - "CIP"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push-elz:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'ELZ' }}
+    defaults:
+      run:
+        working-directory: ./docker
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Build Checkov ELZ Image
+        run: |
+          docker build \
+            . --tag ghcr.io/checkov-elz:${{ github.sha }} \
+            --target elz \
+            --file Dockerfile
+
+      - name: Log in to GitHub Container Registry
+        uses: actions/docker-login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Checkov ELZ Image
+        run: |
+          docker push ghcr.io/checkov-elz:${{ github.sha }}
+  
+  build-and-push-cip:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.platform == 'ELZ & CIP' || github.event.inputs.platform == 'CIP' }}
+    defaults:
+      run:
+        working-directory: ./docker
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Build Checkov CIP Image
+        run: |
+          docker build \
+            . --tag ghcr.io/checkov-cip:${{ github.sha }} \
+            --target cip \
+            --file Dockerfile
+
+      - name: Log in to GitHub Container Registry
+        uses: actions/docker-login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Checkov CIP Image
+        run: |
+          docker push ghcr.io/checkov-cip:${{ github.sha }}

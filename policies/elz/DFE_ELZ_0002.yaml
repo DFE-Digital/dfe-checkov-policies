@@ -5,9 +5,15 @@ metadata:
 scope:
   providers: "azurerm"
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "all"
-  attribute: "location"
-  operator: "contains"
-  value: "uksouth"
+  or:
+    - cond_type: "attribute"
+      resource_types:
+        - "all"
+      attribute: "location"
+      operator: "not_exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "all"
+      attribute: "location"
+      operator: "contains"
+      value: "uksouth"

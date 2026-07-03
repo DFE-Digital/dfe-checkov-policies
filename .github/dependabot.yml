@@ -1,50 +1,64 @@
 version: 2
 updates:
-  - package-ecosystem: "docker"
-    directory: "/docker"
-    schedule:
-      interval: "weekly"
-    rebase-strategy: "auto"
-    cooldown:
-      default-days: 7
-    groups:
-      patch-updates:
-        update-types: ["patch"]
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-    rebase-strategy: "auto"
+    open-pull-requests-limit: 1
     cooldown:
       default-days: 7
-    groups:
-      vendor-minor:
-        patterns: ["actions/*"]
-        update-types: ["minor"]
-      patch-updates:
-        update-types: ["patch"]
+    commit-message:
+      prefix: "chore(Dependabot): "
     ignore:
       - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+        update-types:
+          - "version-update:semver-major"
+    groups:
+      github-actions-deps:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "docker"
+    directory: "/docker"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 1
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "chore(Dependabot): "
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+    groups:
+      docker-deps:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "npm"
     directory: "/docs"
     schedule:
       interval: "weekly"
-    rebase-strategy: "auto"
-    insecure-external-code-execution: deny
+    open-pull-requests-limit: 1
     cooldown:
       default-days: 7
-    groups:
-      vendor-minor:
-        patterns: ["@11ty/*"]
-        update-types: ["minor"]
-      patch-updates:
-        update-types: ["patch"]
+    commit-message:
+      prefix: "chore(Dependabot): "
     ignore:
       - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+        update-types:
+          - "version-update:semver-major"
+    groups:
+      npm-deps:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

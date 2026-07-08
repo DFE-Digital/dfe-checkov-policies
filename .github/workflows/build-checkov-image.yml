@@ -13,8 +13,8 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write # Needed: Push GHCR, Push GitHub Tag
+      contents: write # Need: Push GitHub Tag
+      packages: write # Need: Push GHCR
     strategy:
       fail-fast: false
       matrix:

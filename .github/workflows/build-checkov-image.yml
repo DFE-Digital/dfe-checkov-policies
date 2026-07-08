@@ -56,10 +56,12 @@ jobs:
           IMAGE="ghcr.io/$REPOSITORY/checkov-$PLATFORM:$CHECKSUM"
           
           if docker buildx imagetools inspect "$IMAGE" > /dev/null 2>&1; then
-            echo "Image $IMAGE Already Exists, Skipping Build & Publish.."
+            echo "Checksum: $CHECKSUM"
+            echo "Image with Checksum Already Exists, Skipping Build & Publish.."
             BUILD="false"
           else
-            echo "Image $IMAGE Does Not Exist, Building & Publishing.."
+            echo "Checksum: $CHECKSUM"
+            echo "Image with Checksum Does Not Exist, Building & Publishing.."
             BUILD="true"
           fi
           

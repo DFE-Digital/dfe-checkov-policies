@@ -5,7 +5,7 @@ metadata:
 definition:
   cond_type: "attribute"
   resource_types:
-    - "all"
+    - "taggable"
   attribute: "tags.Environment"
   operator: "within"
   value:

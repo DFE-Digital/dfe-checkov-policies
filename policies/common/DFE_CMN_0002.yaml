@@ -5,6 +5,6 @@ metadata:
 definition:
   cond_type: "attribute"
   resource_types:
-    - "all"
+    - "taggable"
   attribute: "tags.Service Offering"
   operator: "exists"

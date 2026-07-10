@@ -1,0 +1,10 @@
+metadata:
+  name: "Retention Days is Set for Log Analytics Workspace"
+  id: "DFE_CMN_0007"
+  category: "LOGGING"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "azurerm_log_analytics_workspace"
+  attribute: "retention_in_days"
+  operator: "exists"

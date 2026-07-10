@@ -33,6 +33,7 @@ These policies apply to both landing zones (CIP and ELZ).
 | DFE_CMN_0004 | Azure Key Vault should use RBAC permission model          | Enable RBAC permission model across Key Vaults. Learn more at: https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-migration      | IAM      | Active |
 | DFE_CMN_0005 | Deny Cosmos DB                                            | Deny Cosmos.                                                                                                                                 | Security | Active |
 | DFE_CMN_0006 | Daily Quota Limit is set for Log Analytics Workspace      | Ensures Daily Quota is set                                                                                                                   | Logging  | Active |
+| DFE_CMN_0007 | Retention Days is Set for Log Analytics Workspace         | Retention Days is Set.                                                                                                                       | Logging  | Active |
 
 ## CIP policies (Cloud Infrastructure Platform)
 

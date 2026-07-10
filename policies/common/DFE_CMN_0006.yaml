@@ -1,0 +1,10 @@
+metadata:
+  name: "Daily Quota Limit is set for Log Analytics Workspace"
+  id: "DFE_CMN_0006"
+  category: "LOGGING"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "azurerm_log_analytics_workspace"
+  attribute: "daily_quota_gb"
+  operator: "exists"

@@ -1,5 +1,5 @@
 metadata:
-  name: "Ensure daily quota limit is set for Log Analytics Workspace"
+  name: "Daily Quota Limit is set for Log Analytics Workspace"
   id: "DFE_CMN_0006"
   category: "LOGGING"
 definition:

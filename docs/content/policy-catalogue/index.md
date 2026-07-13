@@ -34,6 +34,7 @@ These policies apply to both landing zones (CIP and ELZ).
 | DFE_CMN_0005 | Deny Cosmos DB                                            | Deny Cosmos.                                                                                                                                 | Security | Active |
 | DFE_CMN_0006 | Daily Quota Limit is set for Log Analytics Workspace      | Ensures Daily Quota is set                                                                                                                   | Logging  | Active |
 | DFE_CMN_0007 | Retention Days is Set for Log Analytics Workspace         | Retention Days is Set.                                                                                                                       | Logging  | Active |
+| DFE_CMN_0008 | Ensure Resource Groups have a Consumption Budget          | Ensures that all resource groups have a consumption budget linked to them                                                                    | Logging  | Active |
 
 ## CIP policies (Cloud Infrastructure Platform)
 

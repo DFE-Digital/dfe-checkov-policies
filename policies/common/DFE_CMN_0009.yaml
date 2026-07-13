@@ -1,0 +1,10 @@
+metadata:
+  name: "Daily data cap is set for Application Insights"
+  id: "DFE_CMN_0009"
+  category: "LOGGING"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "azurerm_application_insights"
+  attribute: "daily_data_cap_in_gb"
+  operator: "exists"

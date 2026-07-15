@@ -1,0 +1,10 @@
+metadata:
+  name: "Sampling percentage is set for Application Insights"
+  id: "DFE_CMN_0010"
+  category: "LOGGING"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "azurerm_application_insights"
+  attribute: "sampling_percentage"
+  operator: "exists"

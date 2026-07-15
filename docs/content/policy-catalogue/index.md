@@ -35,6 +35,8 @@ These policies apply to both landing zones (CIP and ELZ).
 | DFE_CMN_0006 | Daily Quota Limit is set for Log Analytics Workspace                 | Ensures Daily Quota is set                                                                                                                   | Logging  | Active |
 | DFE_CMN_0007 | Retention Days is Set for Log Analytics Workspace                    | Retention Days is Set.                                                                                                                       | Logging  | Active |
 | DFE_CMN_0008 | Ensure Resource Groups have a Consumption Budget                     | Ensures that all resource groups have a consumption budget linked to them                                                                    | Logging  | Active |
+| DFE_CMN_0009 | Daily data cap is set for Application Insights                       | Ensures that all app insights resources have explicitly set the data cap in GB                                                               | Logging  | Active |
+| DFE_CMN_0010 | Sampling percentage is set for Application Insights                  | Ensures that all app insights resources have explicitly set the sampling rate                                                                | Logging  | Active |
 | DFE_CMN_0011 | Ensure Log Analytics Workspace Data is Exported to a Storage Account | Ensures that log analytics workspace resources have a data export rule, and that the data export rule is exporting to a storage account      | Logging  | Active |
 
 ## CIP policies (Cloud Infrastructure Platform)

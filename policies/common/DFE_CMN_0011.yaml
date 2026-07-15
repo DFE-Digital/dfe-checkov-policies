@@ -1,0 +1,23 @@
+metadata:
+  name: "Ensure Log Analytics Workspace Data is Exported to a Storage Account"
+  id: "DFE_CMN_0011"
+  category: "LOGGING"
+definition:
+  and:
+    - cond_type: "filter"
+      attribute: "resource_type"
+      operator: "within"
+      value:
+        - "azurerm_log_analytics_workspace"
+    - cond_type: "connection"
+      resource_types:
+        - "azurerm_log_analytics_workspace"
+      connected_resource_types:
+        - "azurerm_log_analytics_data_export_rule"
+      operator: "exists"
+    - cond_type: "connection"
+      resource_types:
+        - "azurerm_log_analytics_data_export_rule"
+      connected_resource_types:
+        - "azurerm_storage_account"
+      operator: "exists"

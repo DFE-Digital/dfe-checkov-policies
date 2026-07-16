@@ -38,6 +38,7 @@ These policies apply to both landing zones (CIP and ELZ).
 | DFE_CMN_0009 | Daily data cap is set for Application Insights                       | Ensures that all app insights resources have explicitly set the data cap in GB                                                               | Logging  | Active |
 | DFE_CMN_0010 | Sampling percentage is set for Application Insights                  | Ensures that all app insights resources have explicitly set the sampling rate                                                                | Logging  | Active |
 | DFE_CMN_0011 | Ensure Log Analytics Workspace Data is Exported to a Storage Account | Ensures that log analytics workspace resources have a data export rule, and that the data export rule is exporting to a storage account      | Logging  | Active |
+| DFE_CMN_0012 | Ensure Azure Storage Accounts have Lifecycle Rules                   | Ensures that azure storage accounts have a lifecycle management policy, and that the policy must have at least one rule defined              | Security | Active |
 
 ## CIP policies (Cloud Infrastructure Platform)
 

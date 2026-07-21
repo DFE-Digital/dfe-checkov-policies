@@ -1,4 +1,4 @@
-FROM bridgecrew/checkov@sha256:c41d3b95e0d1de6d0e288fc77541b11a9c55ff0b20c1ad3c981d29e079a5fb0e AS base
+FROM bridgecrew/checkov@sha256:c64ffb6d6fc8087c896341a2c697770a04a1cf558db04fa7b8129d8ca6bce336 AS base
 
 COPY policies/common /opt/policies
 COPY docker/entrypoint.sh /entrypoint.sh

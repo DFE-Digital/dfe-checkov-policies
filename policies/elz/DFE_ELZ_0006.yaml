@@ -1,0 +1,16 @@
+metadata:
+  id: "DFE_ELZ_0006"
+  name: "Enforce write-only network security groups on subnets"
+  category: "NETWORKING"
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "azurerm_subnet"
+      attribute: "network_security_group_id_wo"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "azurerm_subnet"
+      attribute: "network_security_group_id_wo_version"
+      operator: "exists"

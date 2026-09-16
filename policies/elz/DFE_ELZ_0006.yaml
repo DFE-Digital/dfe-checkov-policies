@@ -9,8 +9,9 @@ definition:
         - "azurerm_subnet"
       attribute: "network_security_group_id_wo"
       operator: "exists"
-    - cond_type: "attribute"
+    - cond_type: "connection"
       resource_types:
         - "azurerm_subnet"
-      attribute: "network_security_group_id_wo_version"
-      operator: "exists"
+      connected_resource_types:
+        - "azurerm_subnet_network_security_group_association"
+      operator: "not_exists"
